@@ -19,7 +19,7 @@
     },
     {
       "path": "app/experience.py",
-      "sha256": "54263f698a2e95a65e8bf2d2f39a42f9a1475ac2081c912169dc6b2450d99f7d"
+      "sha256": "06bfde4f57e7974a8722395227547a88ec1e5f3ad01cd33ac17876d20ad8603a"
     },
     {
       "path": "app/loading_ui.py",
@@ -31,7 +31,7 @@
     },
     {
       "path": "app/visual_design.py",
-      "sha256": "140b451f41538440f2c0d75ece9ca6cd0680b9330e691839297e1b8ff4e03209"
+      "sha256": "65eda4a784e8c00c74df39645f2be6ec62f297e4515379c5b102ef3072aea131"
     },
     {
       "path": "output/figures/confusion.png",
@@ -72,6 +72,11 @@
     {
       "path": "src/result_copy.py",
       "sha256": "521f408efe0278f09f21811777c09bba7050c5d8c30276ff3ac2866dfe1f06b0"
+    },
+    {
+      "path": "界面迭代记录.md",
+      "sha256": "1688301274878530667c9de494484e9a4f8337895ccfef65c7b24e0ce78672a3"
     }
-  ]
+  ],
+  "ui_revision": "2026-10-26-horizontal-result"
 }

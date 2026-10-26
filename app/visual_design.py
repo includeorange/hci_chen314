@@ -141,35 +141,48 @@ def step_orbit(stage,previous,motion=True):
     frame(body,185,motion)
 
 def result_chart(cur,threshold,previous=None,motion=True):
-    """Plot model score, not fitness progress; single submissions have a single point."""
+    """A linear, left-to-right model-score track; raw scores stay in details."""
     score=float(cur['score']);threshold=float(threshold)
-    top,bottom=43,218
-    y=lambda s:top+float(s)*(bottom-top)
-    boundary=y(threshold);cy=y(score);cx=600 if previous else 460
-    color=ORANGE if cur['prediction'] else GREEN
-    line='';prev_text='';previous_dot=''
+    if not 0 < threshold < 1 or not 0 <= score <= 1:
+        raise ValueError('Invalid model score or threshold')
+    def label(value):
+        return '提示可能偏低' if float(value)>=threshold else '未提示偏低'
+    color=ORANGE if score>=threshold else GREEN
+    position=score*100;boundary=threshold*100
+    start=float(previous['score'])*100 if previous else position
+    # Keep the label within the frame; the actual dot is never clamped or rescaled.
+    label_position=max(14,min(86,position))
+    previous_html=''
     if previous:
-        py=y(previous['score']);pc=ORANGE if previous['prediction'] else GREEN
-        line=f'<path class="draw" pathLength="1" d="M 320 {py:.2f} L {cx} {cy:.2f}" stroke="#9aa58f" stroke-width="2" fill="none"/>'
-        previous_dot=f'<circle cx="320" cy="{py:.2f}" r="6" fill="{pc}"/><path d="M320 {py+9:.2f}V233" stroke="#d2d4c7"/><text x="320" y="257" text-anchor="middle" font-size="14" fill="#69715f">上次提交</text>'
-        prev_text='连接的是两次填写结果，不是实际体能随时间变化。'
-    else:prev_text='仅展示本次提交；修改并重新提交后，可比较两次判断。'
-    label='本次 · 提示偏低' if cur['prediction'] else '本次 · 未提示偏低'
-    body=f'''<style>.chart-wrap{{background:#fcfaf4;border:1px solid #d5d3c5;border-radius:20px;padding:18px 18px 10px}}.chart-title{{font-size:14px;font-weight:600;margin:0 0 7px}}.chart-note{{font-size:12px;color:#68715f;line-height:1.7;margin:5px 0 0}}@media(max-width:700px){{.chart-wrap{{padding:16px 8px}}svg text{{font-size:20px}}}}</style>
-    <div class="chart-wrap"><div class="chart-title">本次判断的位置</div>
-    <svg viewBox="0 0 900 280" role="img" aria-label="偏低标签评分{score:.3f}，判断分界{threshold:.3f}。{escape(label)}。这不是体能分数或疾病概率。">
-    <defs><linearGradient id="sage"><stop stop-color="#edf0df"/><stop offset="1" stop-color="#f8f8ee"/></linearGradient><linearGradient id="clay"><stop stop-color="#f7e8d9"/><stop offset="1" stop-color="#fcf7ef"/></linearGradient></defs>
-    <rect x="180" y="{top}" width="665" height="{boundary-top:.2f}" fill="url(#sage)"/>
-    <rect x="180" y="{boundary:.2f}" width="665" height="{bottom-boundary:.2f}" fill="url(#clay)"/>
-    <rect x="171" y="{top}" width="4" height="{boundary-top:.2f}" rx="2" fill="#80977b"/>
-    <rect x="171" y="{boundary:.2f}" width="4" height="{bottom-boundary:.2f}" rx="2" fill="#c58360"/>
-    <text x="157" y="{(top+boundary)/2+5:.2f}" text-anchor="end" font-size="14" fill="#52725c">未提示偏低一侧</text>
-    <text x="157" y="{(bottom+boundary)/2+5:.2f}" text-anchor="end" font-size="14" fill="#984728">提示偏低一侧</text>
-    <path d="M180 {boundary:.2f}H845" stroke="#b8b8a8" stroke-width="1.5" stroke-dasharray="6 6"/>
-    <text x="843" y="{boundary-8:.2f}" font-size="12" text-anchor="end" fill="#68715f">判断分界 {threshold:.2f}</text>
-    {line}{previous_dot}<path d="M{cx} {cy+10:.2f}V233" stroke="#d2d4c7"/>
-    <circle class="halo" cx="{cx}" cy="{cy:.2f}" r="21" fill="none" stroke="{color}" stroke-width="2" opacity=".35"/>
-    <circle class="point" cx="{cx}" cy="{cy:.2f}" r="8" fill="{color}" stroke="#fffdf7" stroke-width="3"/>
-    <text x="{cx}" y="257" text-anchor="middle" font-size="14" fill="#30372e">本次提交 · {score:.3f}</text>
-    </svg><div class="chart-note">{prev_text}<br>点的位置表示模型对“偏低标签”的判断倾向，不是体能分数或疾病概率。</div></div>'''
-    frame(body,410,motion)
+        old=float(previous['score']);old_label=label(old)
+        old_color=ORANGE if old>=threshold else GREEN
+        previous_html=f'<div class="previous"><span>上次提交 · {old_label}</span><div class="previous-track" style="--score:{old*100:.8f}%;--color:{old_color}"><i class="previous-dot"></i></div></div>'
+    note='越向右，模型越倾向于提示偏低；不是体能分数或患病概率。'
+    if previous:note+=' 两次提交的差别不代表实际体能变化。'
+    body=f'''<style>
+    .judgment{{background:#fcfaf4;border:1px solid #d5d3c5;border-radius:20px;padding:22px 24px 18px;font-size:14px}}
+    .judgment h3{{font-size:17px;margin:0 0 8px;font-weight:600}}
+    .result-line{{margin:0;color:var(--color);font-size:20px;font-weight:600}}
+    .legend{{display:flex;gap:16px;flex-wrap:wrap;margin-top:19px;font-size:13px;line-height:1.6}}
+    .legend span{{display:flex;align-items:center;gap:6px}}.key{{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}}
+    .plot{{margin:40px 12px 0;position:relative;height:88px}}
+    .track,.previous-track{{height:18px;position:relative;background:linear-gradient(to right,#dce7d5 0 var(--boundary),#f2d4bd var(--boundary) 100%);border-radius:9px}}
+    .boundary{{position:absolute;left:var(--boundary);top:-11px;height:40px;border-left:2px dashed #6a705f}}
+    .boundary-label{{position:absolute;left:var(--boundary);top:-30px;transform:translateX(-50%);font-size:12px;white-space:nowrap;color:#59634f}}
+    .marker{{position:absolute;left:var(--score);top:9px;animation:marker-slide .8s ease both}}
+    .dot{{display:block;width:20px;height:20px;border-radius:50%;background:var(--color);border:3px solid #fffdf7;box-shadow:0 0 0 5px color-mix(in srgb,var(--color) 18%,transparent);transform:translate(-50%,-50%)}}
+    .current-label{{position:absolute;left:var(--label);top:38px;transform:translateX(-50%);white-space:nowrap;color:var(--color);font-weight:600}}
+    .previous{{border-top:1px solid #e0dfd3;padding-top:13px;margin:0 0 14px;font-size:13px;color:#616b58}}
+    .previous-track{{margin:13px 12px 4px;height:8px;opacity:.8}}
+    .previous-track:after{{content:"";position:absolute;left:var(--boundary);top:-3px;height:14px;border-left:1px dashed #6a705f}}
+    .previous-dot{{position:absolute;left:var(--score);top:4px;width:12px;height:12px;border:2px solid var(--color);background:#fcfaf4;border-radius:50%;transform:translate(-50%,-50%)}}
+    .chart-note{{font-size:12px;color:#59634f;line-height:1.75;margin:0}}
+    @keyframes marker-slide{{from{{left:var(--start);opacity:0}}to{{left:var(--score);opacity:1}}}}
+    @media(max-width:480px){{.judgment{{padding:18px 14px}}.legend{{gap:6px 14px}}.result-line{{font-size:18px}}}}
+    </style><section class="judgment" style="--score:{position:.8f}%;--start:{start:.8f}%;--boundary:{boundary:.8f}%;--label:{label_position:.8f}%;--color:{color}">
+    <h3>本次模型判断</h3><p class="result-line">{label(score)}</p>
+    <div class="legend"><span><i class="key" style="background:{GREEN}"></i>左侧：未提示偏低</span><span><i class="key" style="background:{ORANGE}"></i>右侧：提示可能偏低</span></div>
+    <div class="plot" role="img" aria-label="本次结果：{label(score)}。圆点越向右，模型越倾向于提示偏低。">
+    <div class="boundary-label">判断分界</div><div class="track"><div class="boundary"></div><div class="marker"><i class="dot"></i></div></div><div class="current-label">● 本次结果</div></div>
+    {previous_html}<p class="chart-note">{note}</p></section>'''
+    frame(body,320,motion)

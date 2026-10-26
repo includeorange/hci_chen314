@@ -98,7 +98,7 @@ def render(pack,example,clear,restore,payload,num,yesno,remember):
             st.write(DEFINITION);st.write(REFERENCE);st.write(explanation['boundary'])
             st.write('模型预测能力有限；问得更详细，并未证明主模型更准确。')
             st.json(cur['raw']);st.metric('偏低标签评分',f"{cur['score']:.3f}")
-            st.write(f"评分达到{pack['threshold']:.2f}时判为偏低。它不是体能百分制或疾病概率。")
+            st.write(f"评分低于{pack['threshold']:.2f}时未提示偏低；达到或超过此值时提示可能偏低。横条圆点按评分从左到右排列。它不是体能分数或疾病概率。")
             if rare:st.write('较少见的输入：'+'、'.join(rare))
             st.bar_chart(contrib.set_index('因素'),horizontal=True)
             st.caption('贡献单位为log-odds，日常状态的三个编码列已合并。')
