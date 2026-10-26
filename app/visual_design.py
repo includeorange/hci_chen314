@@ -141,7 +141,7 @@ def step_orbit(stage,previous,motion=True):
     frame(body,185,motion)
 
 def result_chart(cur,threshold,previous=None,motion=True):
-    """A linear, left-to-right model-score track; raw scores stay in details."""
+    """A linear, left-to-right track with visible three-decimal model scores."""
     score=float(cur['score']);threshold=float(threshold)
     if not 0 < threshold < 1 or not 0 <= score <= 1:
         raise ValueError('Invalid model score or threshold')
@@ -156,13 +156,14 @@ def result_chart(cur,threshold,previous=None,motion=True):
     if previous:
         old=float(previous['score']);old_label=label(old)
         old_color=ORANGE if old>=threshold else GREEN
-        previous_html=f'<div class="previous"><span>上次提交 · {old_label}</span><div class="previous-track" style="--score:{old*100:.8f}%;--color:{old_color}"><i class="previous-dot"></i></div></div>'
+        previous_html=f'<div class="previous"><span>上次提交 · {old_label} · 评分 {old:.3f}</span><div class="previous-track" style="--score:{old*100:.8f}%;--color:{old_color}"><i class="previous-dot"></i></div></div>'
     note='越向右，模型越倾向于提示偏低；不是体能分数或患病概率。'
     if previous:note+=' 两次提交的差别不代表实际体能变化。'
     body=f'''<style>
     .judgment{{background:#fcfaf4;border:1px solid #d5d3c5;border-radius:20px;padding:22px 24px 18px;font-size:14px}}
     .judgment h3{{font-size:17px;margin:0 0 8px;font-weight:600}}
     .result-line{{margin:0;color:var(--color);font-size:20px;font-weight:600}}
+    .score-line{{margin:8px 0 0;color:#59634f;font-size:14px}}.score-line strong{{color:#30372e;font-size:20px;font-variant-numeric:tabular-nums;margin-left:6px}}
     .legend{{display:flex;gap:16px;flex-wrap:wrap;margin-top:19px;font-size:13px;line-height:1.6}}
     .legend span{{display:flex;align-items:center;gap:6px}}.key{{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}}
     .plot{{margin:40px 12px 0;position:relative;height:88px}}
@@ -180,9 +181,9 @@ def result_chart(cur,threshold,previous=None,motion=True):
     @keyframes marker-slide{{from{{left:var(--start);opacity:0}}to{{left:var(--score);opacity:1}}}}
     @media(max-width:480px){{.judgment{{padding:18px 14px}}.legend{{gap:6px 14px}}.result-line{{font-size:18px}}}}
     </style><section class="judgment" style="--score:{position:.8f}%;--start:{start:.8f}%;--boundary:{boundary:.8f}%;--label:{label_position:.8f}%;--color:{color}">
-    <h3>本次模型判断</h3><p class="result-line">{label(score)}</p>
+    <h3>本次模型判断</h3><p class="result-line">{label(score)}</p><p class="score-line">本次评分<strong>{score:.3f}</strong></p>
     <div class="legend"><span><i class="key" style="background:{GREEN}"></i>左侧：未提示偏低</span><span><i class="key" style="background:{ORANGE}"></i>右侧：提示可能偏低</span></div>
-    <div class="plot" role="img" aria-label="本次结果：{label(score)}。圆点越向右，模型越倾向于提示偏低。">
+    <div class="plot" role="img" aria-label="本次结果：{label(score)}，模型评分{score:.3f}。圆点越向右，模型越倾向于提示偏低。">
     <div class="boundary-label">判断分界</div><div class="track"><div class="boundary"></div><div class="marker"><i class="dot"></i></div></div><div class="current-label">● 本次结果</div></div>
     {previous_html}<p class="chart-note">{note}</p></section>'''
     frame(body,320,motion)

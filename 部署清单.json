@@ -31,7 +31,7 @@
     },
     {
       "path": "app/visual_design.py",
-      "sha256": "65eda4a784e8c00c74df39645f2be6ec62f297e4515379c5b102ef3072aea131"
+      "sha256": "52196212612d319a3d6ec294ec35ca60f36cf9040d28daa2d0fcdedc8e8db437"
     },
     {
       "path": "output/figures/confusion.png",
@@ -75,7 +75,7 @@
     },
     {
       "path": "界面迭代记录.md",
-      "sha256": "1688301274878530667c9de494484e9a4f8337895ccfef65c7b24e0ce78672a3"
+      "sha256": "2e859a4bf2b03d5391c991a190f6a2ba74bbc583cc84b36c3a352485678e4852"
     }
   ],
   "ui_revision": "2026-10-26-horizontal-result"
