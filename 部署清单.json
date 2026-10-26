@@ -1,0 +1,77 @@
+{
+  "ui_version": "3.1",
+  "model_version": "2.0",
+  "status": "prepared_not_deployed",
+  "python": "3.12",
+  "entrypoint": "app/app.py",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "9f6b292277edac2f83fd085e06710f4e70b60a7c8bced47e392e433c3965f08a"
+    },
+    {
+      "path": ".streamlit/config.toml",
+      "sha256": "8c0d61fe1b358c9fe5ad271eedf4cdcd80da4acc885184248f0a4d45b35c48b0"
+    },
+    {
+      "path": "app/app.py",
+      "sha256": "319aa1b8cf4b828ac88d9e4510edd99d5abdc3482c690a05fc1f5269b6c7ec3f"
+    },
+    {
+      "path": "app/experience.py",
+      "sha256": "54263f698a2e95a65e8bf2d2f39a42f9a1475ac2081c912169dc6b2450d99f7d"
+    },
+    {
+      "path": "app/loading_ui.py",
+      "sha256": "12a01d3b7a3ef08174ecd9eb50cdc3fa48ba66794931b1a6d899ae887575494e"
+    },
+    {
+      "path": "app/support_ui.py",
+      "sha256": "230e2036fc1c1527681f84296617a30748ceb40b0aeb63c14d2e2852b38fce66"
+    },
+    {
+      "path": "app/visual_design.py",
+      "sha256": "140b451f41538440f2c0d75ece9ca6cd0680b9330e691839297e1b8ff4e03209"
+    },
+    {
+      "path": "output/figures/confusion.png",
+      "sha256": "160d6ed297024190e633078c045cee2e9c02b556c6fdf47315b51f8e6838e401"
+    },
+    {
+      "path": "output/figures/importance.png",
+      "sha256": "0d64d50e52b4eec36be2a14a2384045f9fd6880005dec32a37cf55c57a8f2557"
+    },
+    {
+      "path": "output/figures/model_comparison.png",
+      "sha256": "40be59c7f5acaf6adb457f085fdb83e86833ecd4009a89a2ad80b13d473e1d97"
+    },
+    {
+      "path": "output/models/model_bundle.joblib",
+      "sha256": "c308a63aedea7755d16a56263a07af22a2379183af4fe2701501b81bd14708fd"
+    },
+    {
+      "path": "output/results/results.json",
+      "sha256": "16e99ec515368a85ef4bb0bc21578a3744f60d214f4acc8baf0e052121fe0f93"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e9ee4ad4891e123b2ea836ff0dca56427599eefb142932da56a4db44a33c2100"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "13872374ae1853f2fba33b83771c5b803ef6091441a8295b808c85b1149e1a04"
+    },
+    {
+      "path": "src/artifact_store.py",
+      "sha256": "b7890535b3e51bcb5d7930d5113e1eb54771372a499d2f3a93bba7f8a08660bd"
+    },
+    {
+      "path": "src/common.py",
+      "sha256": "c5e517751877456350c65df4b44407092926a8775bb3cdfeec330c4faef6cc56"
+    },
+    {
+      "path": "src/result_copy.py",
+      "sha256": "521f408efe0278f09f21811777c09bba7050c5d8c30276ff3ac2866dfe1f06b0"
+    }
+  ]
+}
