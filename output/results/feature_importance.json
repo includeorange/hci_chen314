@@ -1,0 +1,308 @@
+{
+  "version": "4.0",
+  "sample_name": "NHANES 2001–2002验证集",
+  "n": 1195,
+  "positive": 161,
+  "negative": 1034,
+  "baseline": 0.6451938440837608,
+  "threshold": 0.15,
+  "seed": 42,
+  "repeats": 30,
+  "std_ddof": 0,
+  "features": [
+    "Age",
+    "BMI",
+    "Daily2",
+    "Daily3",
+    "Daily4",
+    "TransportTimes30",
+    "TransportMinutesDay",
+    "StrengthTimes30",
+    "ModerateTimes30",
+    "ModerateMinutes30",
+    "VigorousTimes30",
+    "VigorousMinutes30",
+    "SportVariety"
+  ],
+  "input_names": {
+    "Age": "年龄（岁）",
+    "BMI": "BMI（kg/m²）",
+    "Daily2": "日常站走较多（0/1）",
+    "Daily3": "日常搬运轻物／爬坡（0/1）",
+    "Daily4": "日常重体力劳动（0/1）",
+    "TransportTimes30": "通勤次数（次／30天）",
+    "TransportMinutesDay": "通勤活动日时长（分钟／活动日）",
+    "StrengthTimes30": "力量训练（次／30天）",
+    "ModerateTimes30": "中等运动次数（次／30天）",
+    "ModerateMinutes30": "中等运动总时长（分钟／30天）",
+    "VigorousTimes30": "较强运动次数（次／30天）",
+    "VigorousMinutes30": "较强运动总时长（分钟／30天）",
+    "SportVariety": "运动项目种类（种）"
+  },
+  "importance": [
+    {
+      "feature": "Age",
+      "name": "年龄",
+      "unit": "岁",
+      "meaning": "调查记录中的年龄。",
+      "source": "人口学调查",
+      "mean": 0.028424458674227344,
+      "std": 0.014808654033375336,
+      "lower": 0.013615804640852007,
+      "upper": 0.04323311270760268
+    },
+    {
+      "feature": "BMI",
+      "name": "BMI",
+      "unit": "kg/m²",
+      "meaning": "体重（千克）除以身高（米）的平方。训练和验证数据使用体检测量值；个人问卷由填写的身高体重换算。",
+      "source": "身体测量",
+      "mean": 0.07418545838989869,
+      "std": 0.015573267214419316,
+      "lower": 0.058612191175479375,
+      "upper": 0.08975872560431801
+    },
+    {
+      "feature": "ModerateMinutes30",
+      "name": "中等强度活动总时长",
+      "unit": "分钟／30天",
+      "meaning": "最近30天中等强度休闲运动的累计时长，按各项次数×每次分钟后相加；通勤不重复计入。",
+      "source": "运动问卷与项目明细",
+      "mean": 0.0016699304395881335,
+      "std": 0.004624298557478246,
+      "lower": -0.0029543681178901124,
+      "upper": 0.006294228997066379
+    },
+    {
+      "feature": "VigorousMinutes30",
+      "name": "较强活动总时长",
+      "unit": "分钟／30天",
+      "meaning": "最近30天较强休闲运动的累计时长，按各项次数×每次分钟后相加；通勤不重复计入。",
+      "source": "运动问卷与项目明细",
+      "mean": 0.009711826871863838,
+      "std": 0.009192529135588153,
+      "lower": 0.0005192977362756847,
+      "upper": 0.01890435600745199
+    },
+    {
+      "feature": "StrengthTimes30",
+      "name": "力量训练次数",
+      "unit": "次／30天",
+      "meaning": "最近30天进行力量训练的次数。零表示报告没有这类训练，不表示未回答。",
+      "source": "运动问卷",
+      "mean": 0.0015394796384620415,
+      "std": 0.004921685808296686,
+      "lower": -0.003382206169834644,
+      "upper": 0.006461165446758728
+    }
+  ],
+  "distributions": {
+    "Age": {
+      "bins": [
+        {
+          "label": "20–29岁",
+          "count": 433
+        },
+        {
+          "label": "30–39岁",
+          "count": 402
+        },
+        {
+          "label": "40–49岁",
+          "count": 360
+        }
+      ],
+      "n": 1195,
+      "missing": 0,
+      "zero": 0,
+      "min": 20.0,
+      "max": 49.0,
+      "median": 34.0
+    },
+    "BMI": {
+      "bins": [
+        {
+          "label": "<18.5",
+          "count": 25
+        },
+        {
+          "label": "18.5–<25",
+          "count": 452
+        },
+        {
+          "label": "25–<30",
+          "count": 419
+        },
+        {
+          "label": "30–<35",
+          "count": 179
+        },
+        {
+          "label": "≥35",
+          "count": 120
+        }
+      ],
+      "n": 1195,
+      "missing": 0,
+      "zero": 0,
+      "min": 16.16,
+      "max": 51.85,
+      "median": 26.21
+    },
+    "ModerateMinutes30": {
+      "bins": [
+        {
+          "label": "0分钟",
+          "count": 577
+        },
+        {
+          "label": ">0–300",
+          "count": 231
+        },
+        {
+          "label": ">300–600",
+          "count": 128
+        },
+        {
+          "label": ">600–1200",
+          "count": 136
+        },
+        {
+          "label": ">1200–2400",
+          "count": 81
+        },
+        {
+          "label": ">2400",
+          "count": 42
+        }
+      ],
+      "n": 1195,
+      "missing": 0,
+      "zero": 577,
+      "min": 0.0,
+      "max": 14560.0,
+      "median": 40.0
+    },
+    "VigorousMinutes30": {
+      "bins": [
+        {
+          "label": "0分钟",
+          "count": 619
+        },
+        {
+          "label": ">0–300",
+          "count": 180
+        },
+        {
+          "label": ">300–600",
+          "count": 88
+        },
+        {
+          "label": ">600–1200",
+          "count": 136
+        },
+        {
+          "label": ">1200–2400",
+          "count": 98
+        },
+        {
+          "label": ">2400",
+          "count": 74
+        }
+      ],
+      "n": 1195,
+      "missing": 0,
+      "zero": 619,
+      "min": 0.0,
+      "max": 13980.0,
+      "median": 0.0
+    },
+    "StrengthTimes30": {
+      "bins": [
+        {
+          "label": "0次",
+          "count": 764
+        },
+        {
+          "label": ">0–4次",
+          "count": 90
+        },
+        {
+          "label": ">4–8次",
+          "count": 28
+        },
+        {
+          "label": ">8–12次",
+          "count": 86
+        },
+        {
+          "label": ">12–30次",
+          "count": 220
+        },
+        {
+          "label": ">30次",
+          "count": 7
+        }
+      ],
+      "n": 1195,
+      "missing": 0,
+      "zero": 764,
+      "min": 0.0,
+      "max": 120.0,
+      "median": 0.0
+    }
+  },
+  "cases": [
+    {
+      "kind": "预测正确",
+      "record_id": "V0001",
+      "validation_row": 0,
+      "source_seqn": 9966,
+      "label": 0,
+      "prediction": 0,
+      "score": 0.05592920761690297,
+      "inputs": {
+        "Age": 39.0,
+        "BMI": 30.22,
+        "Daily2": 0.0,
+        "Daily3": 1.0,
+        "Daily4": 0.0,
+        "TransportTimes30": 0.0,
+        "TransportMinutesDay": 0.0,
+        "StrengthTimes30": 9.0,
+        "ModerateTimes30": 13.0,
+        "ModerateMinutes30": 1080.0,
+        "VigorousTimes30": 26.0,
+        "VigorousMinutes30": 1245.0,
+        "SportVariety": 6.0
+      }
+    },
+    {
+      "kind": "预测错误",
+      "record_id": "V0004",
+      "validation_row": 3,
+      "source_seqn": 9984,
+      "label": 0,
+      "prediction": 1,
+      "score": 0.16846663777308973,
+      "inputs": {
+        "Age": 46.0,
+        "BMI": 36.07,
+        "Daily2": 1.0,
+        "Daily3": 0.0,
+        "Daily4": 0.0,
+        "TransportTimes30": 0.0,
+        "TransportMinutesDay": 0.0,
+        "StrengthTimes30": 0.0,
+        "ModerateTimes30": 8.0,
+        "ModerateMinutes30": 240.0,
+        "VigorousTimes30": 0.0,
+        "VigorousMinutes30": 0.0,
+        "SportVariety": 3.0
+      }
+    }
+  ],
+  "case_rule": "按原记录编号升序，分别取首条预测正确和首条预测错误记录。",
+  "model_sha256": "c308a63aedea7755d16a56263a07af22a2379183af4fe2701501b81bd14708fd",
+  "validation_sha256": "32b049ca5a1605510aabf3507d39ac2c699ec712ac4e4126b129d5e69575dbbb"
+}

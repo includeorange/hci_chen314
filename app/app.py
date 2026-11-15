@@ -157,13 +157,16 @@ def experiments_page():
         if p.exists():st.download_button('下载'+name,p.read_bytes(),file_name=name)
 
 st.sidebar.title('运动有迹')
-page=st.sidebar.radio('入口',['体验体能估计','实验与审核'],key='navigation',label_visibility='collapsed')
+page=st.sidebar.radio('入口',['体验体能估计','模型判断','实验与审核'],key='navigation',label_visibility='collapsed')
 st.sidebar.toggle('动态效果',value=True,key='visual_motion',help='关闭后减少动画。')
 with st.sidebar.expander('使用帮助'):
     st.write('键盘操作：Tab 移动，方向键选择，Enter 确认。')
     st.write('填写中可返回修改；提交后可查看结果，或清空重填。')
 show_relaxation()
 if page=='体验体能估计':predict_page()
+elif page=='模型判断':
+    from model_judgment import render_model_judgment
+    render_model_judgment(ROOT)
 else:
     section=st.sidebar.radio('查看内容',['人群公平性','模型与数据'],key='review_section',label_visibility='collapsed')
     if section=='人群公平性':audit_page()

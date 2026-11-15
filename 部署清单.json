@@ -1,21 +1,24 @@
 {
-  "ui_version": "3.1",
+  "ui_version": "4.2",
   "model_version": "2.0",
-  "status": "prepared_not_deployed",
+  "status": "deployment_source",
   "python": "3.12",
   "entrypoint": "app/app.py",
+  "app_url": "https://hcichen314-o4s9q6d3svqzpzesiz5pbm.streamlit.app/",
+  "ui_revision": "2026-11-15-assignment4-v4.2",
+  "text_hash_newlines": "LF",
   "files": [
     {
       "path": ".gitignore",
-      "sha256": "9f6b292277edac2f83fd085e06710f4e70b60a7c8bced47e392e433c3965f08a"
+      "sha256": "f49fd0cb5d2e60310ab7625f84b6f23eb5b1d8f4a1b27f77e94162b45d15872a"
     },
     {
       "path": ".streamlit/config.toml",
-      "sha256": "8c0d61fe1b358c9fe5ad271eedf4cdcd80da4acc885184248f0a4d45b35c48b0"
+      "sha256": "ec14e2fec403c80b9f01f57b3df0ede5b0e690337c3bc18411d55d12cb2bd221"
     },
     {
       "path": "app/app.py",
-      "sha256": "319aa1b8cf4b828ac88d9e4510edd99d5abdc3482c690a05fc1f5269b6c7ec3f"
+      "sha256": "5fce7665db42be3df47d41396e664ff41c6ebc178f12f9b9a8a561bae73ac590"
     },
     {
       "path": "app/experience.py",
@@ -26,8 +29,12 @@
       "sha256": "12a01d3b7a3ef08174ecd9eb50cdc3fa48ba66794931b1a6d899ae887575494e"
     },
     {
+      "path": "app/model_judgment.py",
+      "sha256": "0ac264a00c7797e80a769a948c3f6b540da6b0ff145302b0d2118b141321c2f1"
+    },
+    {
       "path": "app/support_ui.py",
-      "sha256": "230e2036fc1c1527681f84296617a30748ceb40b0aeb63c14d2e2852b38fce66"
+      "sha256": "9fde1724ad62fc55a8f0505d6e54fc3f90cf84be44068d6692d4eb8c40c9648d"
     },
     {
       "path": "app/visual_design.py",
@@ -50,24 +57,28 @@
       "sha256": "c308a63aedea7755d16a56263a07af22a2379183af4fe2701501b81bd14708fd"
     },
     {
+      "path": "output/results/feature_importance.json",
+      "sha256": "1dc0430ea2568bca8adc3605d8e2db9f82265d3ec067383914df3f325696e5be"
+    },
+    {
       "path": "output/results/results.json",
-      "sha256": "16e99ec515368a85ef4bb0bc21578a3744f60d214f4acc8baf0e052121fe0f93"
+      "sha256": "bf96e3ad7a6456eeca5a1d8e595e7cf2c6e5f2c90f301765b8e59c12c141b889"
     },
     {
       "path": "README.md",
-      "sha256": "e9ee4ad4891e123b2ea836ff0dca56427599eefb142932da56a4db44a33c2100"
+      "sha256": "9f3f1d750fd1976f70e1c451ced99b6809ccb48cdf33142aaa4b77a9d8b9a261"
     },
     {
       "path": "requirements.txt",
-      "sha256": "13872374ae1853f2fba33b83771c5b803ef6091441a8295b808c85b1149e1a04"
+      "sha256": "c47aa27794ba4424a86bb40b75a6ceab2176df1b0588fcaa7153561a81890e89"
     },
     {
       "path": "src/artifact_store.py",
-      "sha256": "b7890535b3e51bcb5d7930d5113e1eb54771372a499d2f3a93bba7f8a08660bd"
+      "sha256": "5d82eb0913363fe3a829ac34eb8c6d8839488c6105e2843fe39cb89f4db73777"
     },
     {
       "path": "src/common.py",
-      "sha256": "c5e517751877456350c65df4b44407092926a8775bb3cdfeec330c4faef6cc56"
+      "sha256": "891b89edb04274a121a18b4ab713ec722f8e66c0212fde9b6d9b3001d25db283"
     },
     {
       "path": "src/result_copy.py",
@@ -75,8 +86,7 @@
     },
     {
       "path": "界面迭代记录.md",
-      "sha256": "2e859a4bf2b03d5391c991a190f6a2ba74bbc583cc84b36c3a352485678e4852"
+      "sha256": "f6b6ca52a65471079ef87f7765b10083a3a0314e190c56a494204d70df397907"
     }
-  ],
-  "ui_revision": "2026-10-26-horizontal-result"
+  ]
 }
