@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>抬手计数</title><link rel="stylesheet" href="style.css?v=5.5"></head>
+<body>
+<main>
+  <div class="topline"><span class="eyebrow">课间动一动</span><span id="cameraStatus" class="camera-status">摄像头已关闭</span></div>
+  <fieldset class="source-picker"><legend>选择检测方式</legend><label><input type="radio" name="source" value="camera" checked> 摄像头实时检测</label><label><input type="radio" name="source" value="video"> 上传视频检测</label></fieldset>
+  <section id="filePanel" class="file-panel" hidden>
+    <label for="videoFile">选择本机视频</label><input id="videoFile" type="file" accept="video/*,.mp4,.webm,.mov,.m4v" aria-describedby="fileHelp">
+    <p id="fileHelp" class="muted">建议 MP4（H.264）或 WebM。识别视频中人物的右手抬举；请选择已获同意使用的影像。</p>
+    <p id="fileInfo" role="status">尚未选择视频</p>
+    <div class="progress-row"><progress id="progress" max="100" value="0" aria-label="视频检测进度"></progress><span id="progressText">等待开始</span></div>
+    <label class="mirror-option"><input id="mirroredFile" type="checkbox"> 这是左右镜像保存的自拍视频</label>
+  </section>
+  <div class="layout">
+    <section class="camera-panel" aria-label="摄像头画面">
+      <div class="view">
+        <video id="video" playsinline muted preload="auto" aria-label="检测画面"></video><canvas id="overlay" aria-hidden="true"></canvas>
+        <div id="placeholder" class="placeholder">
+          <svg viewBox="0 0 300 210" aria-hidden="true"><path d="M37 52V30h25M238 30h25v22M37 158v22h25M238 180h25v-22" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="150" cy="61" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M150 83v64m-32-47 32-13 34 15 27-52m-93 50-21 51m53-4-27 36m27-36 25 36" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="211" cy="50" r="7" fill="#c4774e"/></svg>
+          <strong>让双肩、右肘和右手腕入镜</strong><span>先把右手放在胸前、低于肩部。</span>
+        </div>
+        <div id="liveBadge" class="live-badge" hidden>镜像画面 · 使用你的右手</div>
+        <p id="readiness" class="readiness" role="status">尚未开始</p>
+      </div>
+      <p id="lightHint" class="light-hint" role="status" hidden></p>
+      <div id="statusBox" class="status-box" role="status" aria-live="polite"><strong id="statusTitle">先确认放下，再开始</strong><p id="statusDetail">开启后先把手腕保持在放下线以下，等“可以举手了”再做第一次动作。</p></div>
+    </section>
+    <section class="count-panel" aria-label="计数与操作">
+      <span class="count-label">本次完成</span><div class="count-line"><span id="total" aria-live="polite">0</span><span>次</span></div>
+      <p id="countBreakdown" class="muted">自动计数 0 次 · 手动调整 0 次</p>
+      <ol class="steps" aria-label="动作顺序"><li id="stepDown">手腕降过下线</li><li id="stepUp">手腕举过上线</li><li id="stepCount">完成一次</li></ol>
+      <button id="start" class="primary">开启摄像头并准备</button>
+      <div class="control-row"><button id="pause" disabled>暂停</button><button id="stop" disabled>结束并关闭</button></div>
+      <div class="correction"><p>数错了？在这里修正</p><div class="control-row"><button id="remove" disabled>撤销一次 −1</button><button id="add" disabled>补记一次 +1</button></div><span id="correctionNote" class="muted" role="status">撤销多记的，补上漏记的。</span></div>
+    </section>
+  </div>
+  <p class="privacy">画面与所选视频仅在当前浏览器处理，不发送到服务器，不自动录制。</p>
+  <details><summary>计数规则与使用帮助</summary><div class="help">
+    <p>系统看右手腕的位置。“放下”是手腕降到下方“放下线”以下并停约 0.2 秒，不要求整条手臂垂到底；“举起”是手腕升到上方“举起线”以上并停约 0.2 秒。先降下、再举起，记 1 次。两条线会跟随肩部位置调整，在关键位置识别正常时显示。</p>
+    <p>开启摄像头后先保持放下，等绿色“已就绪 · 可以举手了”再做第一次动作。如果手腕直到举起后才被看清，此前的放下未获确认，这次不会自动计数；确实完成但漏计时，可点击“补记一次”，再放下等待就绪。</p>
+    <p>举起后保持 3 秒仍只记 1 次。手腕只降到两条线之间，还没有准备好下一次计数；降过放下线并停一下后，页面会提示“可以举手了”。</p>
+    <p>偏暗提醒依据摄像头画面亮度，与关节识别独立；熄灯后有屏幕等补光，也可能不提示。提醒本身不停止计数；位置看不清或出画时，会隐藏关键点并暂不计数。若手腕圆点漂移，请补光并核对位置，未提示偏暗也不代表定位一定准确。</p>
+    <p>一次只让一人入镜，双肩、右肘和右手腕都应在画面内。系统检测到部位出画、关键位置缺失或肩部／手腕看不清时，暂停计数并指出具体部位。提示中的左右以你看到的画面为准；恢复后请先放下右手。暂停时摄像头仍开着；点击“结束并关闭”才会关闭。</p>
+    <p>没有画面：检查浏览器的摄像头授权，关闭其他占用摄像头的应用，再点击开始。</p>
+    <p>视频检测：选择文件后点击“开始检测视频”。系统按视频顺序每秒取 20 个时间点检测；显示检测进度与动作计数，处理速度取决于设备。暂停不会跳过视频内容；重新检测会从头开始并清空本轮计数。当前识别动作是右手抬举。</p>
+    <p>视频保持原画面方向。若文件本身是左右镜像保存的自拍视频，勾选上方选项，系统会先还原方向再识别右手。视频播放所需编码须受当前浏览器支持；文件无法解码时可换用 MP4（H.264）或 WebM。</p>
+    <p id="jointStatus" class="muted">当前识别情况：摄像头未开启。</p>
+    <button id="export" disabled>保存本次计数记录</button><span class="muted">只保存次数、操作和时间，不包含影像。</span>
+  </div></details>
+</main><script type="module" src="app.mjs?v=5.5"></script>
+</body></html>

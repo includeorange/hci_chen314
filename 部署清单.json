@@ -1,11 +1,11 @@
 {
-  "ui_version": "4.2",
+  "ui_version": "5.5",
   "model_version": "2.0",
   "status": "deployment_source",
   "python": "3.12",
   "entrypoint": "app/app.py",
   "app_url": "https://hcichen314-o4s9q6d3svqzpzesiz5pbm.streamlit.app/",
-  "ui_revision": "2026-11-15-assignment4-v4.2",
+  "ui_revision": "2026-11-25-assignment5-v5.5",
   "text_hash_newlines": "LF",
   "files": [
     {
@@ -18,7 +18,7 @@
     },
     {
       "path": "app/app.py",
-      "sha256": "5fce7665db42be3df47d41396e664ff41c6ebc178f12f9b9a8a561bae73ac590"
+      "sha256": "d2159748b24350e191ea3d26750322b1f9ca06d5c2072933b47fe4fd5a26084d"
     },
     {
       "path": "app/experience.py",
@@ -33,12 +33,76 @@
       "sha256": "0ac264a00c7797e80a769a948c3f6b540da6b0ff145302b0d2118b141321c2f1"
     },
     {
+      "path": "app/raise_counter/app.mjs",
+      "sha256": "63fc99d3bc7b8cd1dc8b9ce56fa2c3a05b61b9d0737363c472f8136e4f661381"
+    },
+    {
+      "path": "app/raise_counter/counter.mjs",
+      "sha256": "be643e3ffb7db9c8f95f2710b64b06dcff70b98e7b42e1ee47c1356b9deece8d"
+    },
+    {
+      "path": "app/raise_counter/feedback.mjs",
+      "sha256": "efda7b3395d47aa1f6735a02284b33cdb4b1648d9a8fc233b180b1cfece65da8"
+    },
+    {
+      "path": "app/raise_counter/index.html",
+      "sha256": "d8bca54ea3223519d8e3ca128e61fffde90492363635548d723e9ce45a922e62"
+    },
+    {
+      "path": "app/raise_counter/style.css",
+      "sha256": "27e1fe58ae83b645d7c149e63fec6d096140584a68050964434a9d6dde30de9e"
+    },
+    {
+      "path": "app/raise_counter/vendor/asset_sources.json",
+      "sha256": "7c29d57e22086556ae972ebb6c2ad4e2a6696dfc94816e7c9fec446a1546c1b4"
+    },
+    {
+      "path": "app/raise_counter/vendor/LICENSE.mediapipe.txt",
+      "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8"
+    },
+    {
+      "path": "app/raise_counter/vendor/package.json",
+      "sha256": "18e96c370b666f1f6b096c96255f19a4750522d207cff5dc721aeb4c4e4da701"
+    },
+    {
+      "path": "app/raise_counter/vendor/pose_landmarker_lite.task",
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    {
+      "path": "app/raise_counter/vendor/vision_bundle.mjs",
+      "sha256": "40f4123dfcd75cfa58add046919cc6f52fde66f009ff582997c09ba54c6ba27c"
+    },
+    {
+      "path": "app/raise_counter/vendor/wasm/vision_wasm_internal.js",
+      "sha256": "4a97e2520ba506c680ecd6ba6acfb146888afa0e2746d57f205352bc6ebb82eb"
+    },
+    {
+      "path": "app/raise_counter/vendor/wasm/vision_wasm_internal.wasm",
+      "sha256": "f00ec4731faa23b3e714d00e88d4d10e2df5c0a427d3a2b4ae6e3526fdd14ef7"
+    },
+    {
+      "path": "app/raise_counter/vendor/wasm/vision_wasm_nosimd_internal.js",
+      "sha256": "927def7b465c51b86e4b3060f93646aca4e27121f4b8fc0483786e407ea9cf1f"
+    },
+    {
+      "path": "app/raise_counter/vendor/wasm/vision_wasm_nosimd_internal.wasm",
+      "sha256": "3821ea9b1f7fb8c549ef2a064ef5c85750bf375c545a49fd6eea0df44a95f1f4"
+    },
+    {
+      "path": "app/raise_counter_ui.py",
+      "sha256": "1512adea9dd09ff7ec61b3aac6d5f7da5dba704e68b0037223c99a717939f529"
+    },
+    {
       "path": "app/support_ui.py",
       "sha256": "9fde1724ad62fc55a8f0505d6e54fc3f90cf84be44068d6692d4eb8c40c9648d"
     },
     {
       "path": "app/visual_design.py",
       "sha256": "52196212612d319a3d6ec294ec35ca60f36cf9040d28daa2d0fcdedc8e8db437"
+    },
+    {
+      "path": "evaluation/evaluate_counts.py",
+      "sha256": "3a2b3d3f136b6ae5b3d9862035aa10e7f3c62b1308e005303df548cc8222c2d3"
     },
     {
       "path": "output/figures/confusion.png",
@@ -66,7 +130,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "9f3f1d750fd1976f70e1c451ced99b6809ccb48cdf33142aaa4b77a9d8b9a261"
+      "sha256": "15a409b0ce40b500454bbbbed8b9ffb3718edd49e4f95a3424c0d03ed944d0da"
     },
     {
       "path": "requirements.txt",
@@ -85,8 +149,22 @@
       "sha256": "521f408efe0278f09f21811777c09bba7050c5d8c30276ff3ac2866dfe1f06b0"
     },
     {
+      "path": "tests/counter.test.mjs",
+      "sha256": "3428a6c4c05461e0c2b7f123c51f5b69e425525988b3fe9db8479beeb535b155"
+    },
+    {
+      "path": "tests/feedback.test.mjs",
+      "sha256": "ce51b134cf03d95081ea5a06e1ce6ef38465b467d1e0ad55e6310995374d0fbc"
+    },
+    {
+      "path": "tests/test_evaluation.py",
+      "sha256": "563e453fbb8934d04e79e1da61fc6c9516aa27b8da31e60faace18967b71bcfc"
+    },
+    {
       "path": "界面迭代记录.md",
-      "sha256": "f6b6ca52a65471079ef87f7765b10083a3a0314e190c56a494204d70df397907"
+      "sha256": "49270f7093fa33babf6890120614d88af5933ab13cb35a48ecba550ae01165e2"
     }
-  ]
+  ],
+  "vision_model": "MediaPipe Pose Landmarker Lite float16 v1",
+  "vision_runtime": "@mediapipe/tasks-vision 0.10.21"
 }
